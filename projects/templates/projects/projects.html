@@ -3,10 +3,25 @@
 
 {% block content %}
 <h1>Projects</h1>
-<p>
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged.
-</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.id }}</td>
+                    <td>{{ project.title }} {% if project.topRated %}<strong>Top Rated</strong>{% endif %}</td>
+                    <td>{{ project.description }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock content %}
