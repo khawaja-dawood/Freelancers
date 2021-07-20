@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Project, Tag, Review
 from .forms import ProjectForm
@@ -21,5 +21,24 @@ def project(request, pk):
 
 def createProject(request):
     form = ProjectForm()
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('projects-home')
     context = {'form': form}
     return render(request=request, template_name='projects/project-form.html', context=context)
+
+
+def updateProject(request, pk):
+    project_data = Project.objects.get(id=pk)
+    form = ProjectForm(instance=project_data)
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project_data)
+        if form.is_valid():
+            form.save()
+            return redirect('projects-home')
+
+    context = {'form': form}
+    return render(request, template_name='projects/project-form.html', context=context)

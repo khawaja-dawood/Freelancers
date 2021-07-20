@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>Title</th>
+                <th></th>
                 <th>Description</th>
             </tr>
         </thead>
@@ -15,6 +16,7 @@
             {% for project in projects %}
                 <tr>
                     <td><a href="{% url 'project' project.id %}">{{ project.title }}</a> {% if project.topRated %}<strong>Top Rated</strong>{% endif %}</td>
+                    <td><a href="{% url 'update-project' project.id %}">Edit</a></td>
                     <td>{{ project.description }}</td>
                 </tr>
             {% endfor %}
