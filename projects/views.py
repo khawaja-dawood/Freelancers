@@ -1,28 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Project, Tag, Review
-
-
-projectsList = [
-    {
-        'id': '1',
-        'title': 'Ecommerce Website',
-        'description': 'Fully functional ecommerce website',
-        'topRated': True
-    },
-    {
-        'id': '2',
-        'title': 'Portfolio Website',
-        'description': 'A personal website to write articles and display work',
-        'topRated': False
-    },
-    {
-        'id': '3',
-        'title': 'Social Network',
-        'description': 'An open source project built by the community',
-        'topRated': True
-    }
-]
+from .forms import ProjectForm
 
 
 def projects(request):
@@ -38,3 +17,9 @@ def project(request, pk):
     # reviews = project_obj.review_set.all()    # ModelName_set.all() --> for querying all children of this obj
     context = {'project': project_obj}
     return render(request=request, template_name='projects/single-project.html', context=context)
+
+
+def createProject(request):
+    form = ProjectForm()
+    context = {'form': form}
+    return render(request=request, template_name='projects/project-form.html', context=context)

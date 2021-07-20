@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <h3>Create Project</h3>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        {{ form|crispy }}
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}
