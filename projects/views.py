@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import *
+from .models import Project, Tag, Review
 
 
 projectsList = [
@@ -25,16 +25,16 @@ projectsList = [
 ]
 
 
-def Projects(request):
-    projects = Project.objects.all()
-    context = {'projects': projects}
+def projects(request):
+    project_obj = Project.objects.all()
+    context = {'projects': project_obj}
     return render(request=request, template_name='projects/projects.html', context=context)
 
 
-def Project(request, pk):
-    projectObject = None
-    for i in projectsList:
-        if i['id'] == str(pk):
-            projectObject = i
-    context = {'project': projectObject}
+def project(request, pk):
+    project_obj = Project.objects.get(id=pk)
+    # tags = project_obj.tags.all()             # for querying ManyToMany relationship
+    # reviews = project_obj.reviews.all()       # reviews.all() can be used if related name is set in models
+    # reviews = project_obj.review_set.all()    # ModelName_set.all() --> for querying all children of this obj
+    context = {'project': project_obj}
     return render(request=request, template_name='projects/single-project.html', context=context)

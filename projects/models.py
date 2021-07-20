@@ -21,13 +21,11 @@ class Project(models.Model):
 
 
 class Review(models.Model):
-
     VOTE_TYPE = (
         ('up', 'up'),
         ('down', 'down')
     )
-    # owner
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True, related_name='reviews')
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=50, choices=VOTE_TYPE)
     created = models.DateTimeField(auto_now_add=True)
