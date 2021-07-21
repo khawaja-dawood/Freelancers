@@ -10,11 +10,20 @@ class Project(models.Model):
     source_link = models.CharField(max_length=200, null=True, blank=True)
     vote_total = models.IntegerField(default=0)
     vote_ratio = models.IntegerField(default=0)
+    featured_image = models.ImageField(null=True, blank=True)
     # auto_now_add --> takes a timestamp when the obj is created.
     # auto_now     --> takes a timestamp everytime the obj is updated.
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     tags = models.ManyToManyField('Tag', blank=True)
+
+    @property
+    def imageURL(self):
+        try:
+            img = self.featured_image.url
+        except ValueError:
+            img = ''
+        return img
 
     def __str__(self):
         return self.title

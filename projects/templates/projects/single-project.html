@@ -4,6 +4,8 @@
 
     <h3>{{ project.title }}</h3>
 
+    <img style="max-width: 500px" src="{{ project.imageURL }}" alt="">
+
     <p>{{ project.description }}</p>
     {% for tag in project.tags.all %}
         <span style="border: 1px solid #888;padding: 1em">{{ tag }}</span>
@@ -11,6 +13,8 @@
 
     <h3>Reviews</h3>
     {% for review in project.reviews.all %}
+        <p>{{ review.created }}</p>
+        <p>{{ review.value }}</p>
         <p>{{ review.body }}</p>
     {% endfor %}
 
