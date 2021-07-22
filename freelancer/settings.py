@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -26,12 +28,14 @@ SECRET_KEY = 'django-insecure-k234-$*btg4=yx-(7q(xe8o8h(7@$m*$!^42fy350xn_0+t&=z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = ['127.0.0.1']
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_cleanup.apps.CleanupConfig',
+
     'projects.apps.ProjectsConfig',
     'crispy_forms',
     'django.contrib.admin',
@@ -43,6 +47,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,8 +63,7 @@ ROOT_URLCONF = 'freelancer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +127,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
+MEDIA_URL = '/images/'
+
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -130,7 +138,11 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
-MEDIA_URL = '/images/'
+
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+# if webapp is in development mode and we have to use manage.py collectstatic after defining this statement
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
