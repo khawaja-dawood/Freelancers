@@ -27,16 +27,19 @@
         <div class="column column--2of3">
           <img class="singleProject__preview" src="{{ project.imageURL}}" alt="portfolio thumbnail" />
           <a href="#" class="singleProject__developer">{{ project.developer.get_full_name }}</a>
-          <h2 class="singleProject__title">{{ project.title}}
-          <span style="text-align: right">
+          <div style="display:flex; justify-content: space-between">
+              <div>
+                  <h2 class="singleProject__title">{{ project.title}}</h2>
+              </div>
+
+            <div class="">
               {% if project.developer == user %}
-                  <div>
-                      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'update-project' project.id %}">Update</a>
-                      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete-project' project.id %}">Delete</a>
-                  </div>
+                  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'update-project' project.id %}">Update</a>
+                  <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete-project' project.id %}">Delete</a>
               {% endif %}
-          </span>
-          </h2>
+            </div>
+          </div>
+
           <h3 class="singleProject__subtitle">About the Project</h3>
           <div class="singleProject__info">
             {{ project.description | linebreaksbr }}

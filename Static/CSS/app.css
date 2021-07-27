@@ -450,6 +450,8 @@ img {
   object-position: top center;
   margin-bottom: 3rem;
   border-radius: 0.7rem;
+  width: 100%;
+
 }
 
 .singleProject__developer {
@@ -510,9 +512,10 @@ img {
 /*========== Projects ==========*/
 
 .project__thumbnail {
-  height: 25rem;
+  height: 10%;
   object-fit: cover;
-  object-position: top center;
+
+  width: 100%;
 }
 
 .project__title {
@@ -845,3 +848,4 @@ img {
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
+

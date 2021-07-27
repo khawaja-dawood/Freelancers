@@ -59,3 +59,10 @@ def delete_project(request, pk):
         return redirect('projects-home')
     context = {'object': project_obj}
     return render(request, template_name='projects/delete.html', context=context)
+
+
+def index(request):
+    developers = MyUser.objects.filter(role='developer')
+    print(developers)
+    context = {'objects': developers}
+    return render(request, template_name='projects/index.html', context=context)
