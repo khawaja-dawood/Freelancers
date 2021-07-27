@@ -40,6 +40,7 @@ def update_project(request, pk):
 
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES, instance=project_data)
+        project_data.title = project_data.title + " (UPDATED)"
         if form.is_valid():
             form.save()
             return redirect('projects-home')

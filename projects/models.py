@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 import uuid
 
-from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager, UserManager
+from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager
 from django.apps import apps
 
 from freelancer import settings
@@ -65,19 +65,19 @@ class MyUser(AbstractUser):
     objects = CustomUserManager()
 
     EMAIL_FIELD = 'email' """=============================+++++++++++++++++++++============================="""
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'registration_number'
 
-    REQUIRED_FIELDS = ['registration_number', 'email']
+    REQUIRED_FIELDS = ['email']
 
 
 class Project(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    title = models.CharField(max_length=150)
+    title = models.CharField(max_length=150, unique=True)
     developer = models.ForeignKey(settings.AUTH_USER_MODEL, max_length=150, on_delete=models.CASCADE, null=True, blank=True)
     featured_image = models.ImageField(null=True, blank=True, default='default.jpg')
     description = models.TextField(null=True, blank=True)
-    demo_link = models.CharField(max_length=200, null=True, blank=True)
-    source_link = models.CharField(max_length=200, null=True, blank=True)
+    demo_link = models.CharField(max_length=200, null=True, blank=True, unique=True)
+    source_link = models.CharField(max_length=200, null=True, blank=True, unique=True)
     vote_total = models.IntegerField(default=0)
     vote_ratio = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
