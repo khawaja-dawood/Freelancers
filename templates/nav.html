@@ -11,11 +11,13 @@
           <div class="toggle-menu__lines"></div>
         </label>
         <ul class="header__menu">
-            <li class="header__menuItem"><a href="index.html">Developers</a></li>
+            <li class="header__menuItem"><a href="#">Developers</a></li>
             <li class="header__menuItem"><a href="{% url 'projects-home' %}">Projects</a></li>
             <li class="header__menuItem"><a href="#">Inbox</a></li>
-            <li class="header__menuItem"><a href="$">My Account</a></li>
-            <li class="header__menuItem"><a href="{% url 'create-project' %}" class="btn btn--sub">Add project</a></li>
+            <li class="header__menuItem"><a href="#">My Account</a></li>
+            {% if request.user.role != 'student' %}
+                <li class="header__menuItem"><a href="{% url 'create-project' %}" class="btn btn--sub">Add project</a></li>
+            {% endif %}
             <!-- <li class="header__menuItem"><a href="#" class="btn btn--sub">Login/Sign Up</a></li> -->
         </ul>
       </nav>
