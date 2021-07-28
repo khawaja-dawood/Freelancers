@@ -11,14 +11,17 @@ from django.utils.translation import gettext_lazy as _
 @admin.action(description='Inactive selected users')
 def make_inactive(modeladmin, request, queryset):
     queryset.update(is_active=0)
+    queryset.update(is_superuser=0)
     queryset.update(is_staff=0)
     messages.success(request, "Selected Record(s) Marked as Inactive Successfully !!")
 
 
 @admin.action(description='Active selected users')
 def make_active(modeladmin, request, queryset):
+    print(queryset.MyUser)
+    print(request)
     queryset.update(is_active=1)
-    messages.success(request, "Selected Record(s) Marked as Active Successfully !!")
+    messages.success(request, f"Selected Record() Marked as Active Successfully !!")
 
 
 class UserAdminConfig(UserAdmin, admin.ModelAdmin):
