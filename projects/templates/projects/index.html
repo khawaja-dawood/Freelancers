@@ -29,47 +29,33 @@
           <div class="container">
             <div class="grid grid--three">
 
+                {% for dev in objects %}
 
-              <div class="column card">
-                <div class="dev">
-                  <a href="/profile.html" class="card__body">
-                    <div class="dev__profile">
-                      <img class="avatar avatar--md" src="https://avatars.githubusercontent.com/u/22437186" alt="image"/>
-                      <div class="dev__meta">
-                        <h3>Shahriar P. Shuvo</h3>
-                        <h5>FullStack Web Designer & Developer</h5>
-                      </div>
+                  <div class="column card">
+                    <div class="dev">
+                      <a href="/profile.html" class="card__body">
+                        <div class="dev__profile">
+                          <img class="avatar avatar--md" src="" alt="image"/>
+                          <div class="dev__meta">
+                            <h3>{{ dev.get_full_name }}</h3>
+                            <h5>{{ dev.job_title }}</h5>
+                          </div>
+                        </div>
+                        <p class="dev__info">
+                            {{ dev.about }}
+                        </p>
+                        <div class="dev__skills">
+                            {% for tag in dev.tags.all %}
+                              <span class="tag tag--pill tag--main">
+                                <small>{{ tag }}</small>
+                              </span>
+                            {% endfor %}
+                        </div>
+                      </a>
                     </div>
-                    <p class="dev__info">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate, ducimus inventore! Sunt,
-                      veniam veritatis? Veritatis placeat, deleniti iure tempore veniam perspiciatis, soluta cupiditate
-                      animi, exercitationem molestias nam doloremque architecto odit.
-                    </p>
-                    <div class="dev__skills">
-                      <span class="tag tag--pill tag--main">
-                        <small>JavaScript</small>
-                      </span>
-                      <span class="tag tag--pill tag--main">
-                        <small>React</small>
-                      </span>
-                      <span class="tag tag--pill tag--main">
-                        <small>SCSS</small>
-                      </span>
-                      <span class="tag tag--pill tag--main">
-                        <small>Nodejs</small>
-                      </span>
-                      <span class="tag tag--pill tag--main">
-                        <small>Express</small>
-                      </span>
-                      <span class="tag tag--pill tag--main">
-                        <small>GraphQL</small>
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
+                  </div>
 
-
+                {% endfor %}
 
             </div>
           </div>

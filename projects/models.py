@@ -45,16 +45,19 @@ class MyUser(AbstractUser):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     registration_number = models.CharField(max_length=150, unique=True)
     username = models.CharField(max_length=150, unique=True)
-    email = models.EmailField(blank=True, null=True, unique=True)
+    email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
-    role = models.CharField(max_length=100, default='Student', help_text='By Default is Student. Admin, Developer, Teacher, Student')
+    phone_number = models.PositiveIntegerField(null=True, blank=True)
+    organization_role = models.CharField(max_length=100, default='Developer', help_text='Like Node.js, Python, ROR or Django developer')
+    job_title = models.CharField(max_length=100, default='Student', help_text='By Default is Student. Admin, Developer, Teacher, Student')
     about = models.TextField(max_length=300, blank=True, null=True)
-    is_staff = models.BooleanField(default=False,
+    is_staff = models.BooleanField(default=False, verbose_name='Staff',
                                    help_text='Designates whether the user can log into this admin site.',
                                    )
-    is_active = models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. '
-                                                            'Unselect this instead of deleting accounts.')
+    is_active = models.BooleanField(default=True, verbose_name='Active',
+                                    help_text='Designates whether this user should be treated as active. '
+                                              'Unselect this instead of deleting accounts.')
     tags = models.ManyToManyField('Tag', blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -103,12 +106,14 @@ class Review(models.Model):
         ('up', 'up'),
         ('down', 'down')
     )
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True, related_name='reviews')
-    body = models.TextField(null=True, blank=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     value = models.CharField(max_length=50, choices=VOTE_TYPE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True, related_name='reviews')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, max_length=300, on_delete=models.CASCADE, null=True, blank=True)
+    body = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.value + " - " + str(self.project)
@@ -118,6 +123,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=200)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
