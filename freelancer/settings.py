@@ -141,7 +141,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR / 'static/images'
 
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 # if webapp is in development mode and we have to use manage.py collectstatic after defining this statement
 
 
@@ -153,4 +153,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'projects.MyUser'
 
-
+LOGIN_REDIRECT_URL = "projects-home"
+LOGIN_URL = "login"

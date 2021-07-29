@@ -1,0 +1,14 @@
+{%extends "main.html"%}
+{%block content%}
+    <br>
+
+    <div style=" margin-left: 10%;
+        margin-top: auto; color: black">
+        <h3>You have been Signed out!</h3>
+        <small class="muted-text">
+            <a href="{% url 'login' %}">Sign In Again</a>
+        </small>
+    </div>
+{%endblock content%}
+
+

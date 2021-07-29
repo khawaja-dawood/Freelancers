@@ -59,8 +59,9 @@ class UserAdminConfig(UserAdmin, admin.ModelAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-                'registration_number', 'username', 'first_name', 'last_name', 'phone_number', 'organization_role', 'job_title', 'email',
-                'password1', 'password2', 'is_active', 'is_staff'),
+                'registration_number', 'username', 'first_name', 'last_name', 'phone_number', 'about', 'tags',
+                'organization_role', 'job_title', 'email', 'password1', 'password2', 'is_active', 'is_staff',
+                'is_superuser', 'groups', 'user_permissions'),
         }),
     )
 

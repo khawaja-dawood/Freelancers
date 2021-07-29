@@ -42,6 +42,18 @@ class CustomUserManager(BaseUserManager):
 
 
 class MyUser(AbstractUser):
+    Student = 1
+    Developer = 2
+    Teacher = 3
+    Admin = 4
+
+    roles = (
+        (Student, 'Student'),
+        (Developer, 'Developer'),
+        (Teacher, 'Teacher'),
+        (Admin, 'Admin'),
+    )
+
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     registration_number = models.CharField(max_length=150, unique=True)
     username = models.CharField(max_length=150, unique=True)
@@ -49,8 +61,8 @@ class MyUser(AbstractUser):
     first_name = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
     phone_number = models.PositiveIntegerField(null=True, blank=True)
-    organization_role = models.CharField(max_length=100, default='Developer', help_text='Like Node.js, Python, ROR or Django developer')
-    job_title = models.CharField(max_length=100, default='Student', help_text='By Default is Student. Admin, Developer, Teacher, Student')
+    job_title = models.CharField(max_length=100, default='Programmer', help_text='Like Node.js, Python, ROR or Django developer')
+    organization_role = models.PositiveSmallIntegerField(max_length=100, default='Student', choices=roles, help_text='By Default is Student. Developer, Teacher, Student')
     about = models.TextField(max_length=300, blank=True, null=True)
     is_staff = models.BooleanField(default=False, verbose_name='Staff',
                                    help_text='Designates whether the user can log into this admin site.',

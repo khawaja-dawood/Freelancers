@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
@@ -62,7 +63,6 @@ def delete_project(request, pk):
 
 
 def index(request):
-    developers = MyUser.objects.filter(organization_role='developer')
-    # print(developers)
+    developers = MyUser.objects.filter(Q(organization_role=2) | Q(organization_role=3))    # print(developers)
     context = {'objects': developers}
     return render(request, template_name='projects/index.html', context=context)
