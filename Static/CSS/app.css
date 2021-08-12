@@ -49,7 +49,7 @@ img {
   display: inline-flex;
   align-items: center;
   list-style: none;
-  gap: 6.5rem;
+  gap: 5rem;
 }
 
 .header__menuItem > a {
@@ -512,10 +512,11 @@ img {
 /*========== Projects ==========*/
 
 .project__thumbnail {
-  height: 10%;
-  object-fit: cover;
 
+  object-fit: cover;
   width: 100%;
+  height: 25rem;
+  object-position: top center;
 }
 
 .project__title {

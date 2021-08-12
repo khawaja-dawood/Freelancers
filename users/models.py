@@ -12,9 +12,15 @@ class Profile(models.Model):
     profile_image = models.ImageField(upload_to='profile-pics/', default='profile-pics/user-default.png', blank=True, null=True)
     social_github = models.URLField(blank=True, null=True)
     social_linkedin = models.URLField(blank=True, null=True)
+    social_stackoverflow = models.URLField(blank=True, null=True)
+    social_twitter = models.URLField(blank=True, null=True)
+    social_website = models.URLField(blank=True, null=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True, verbose_name='Active',
+                                    help_text='Designates whether this profile should be treated as active. '
+                                              'Unselect this instead of deleting accounts.')
 
     def __str__(self):
         return str(self.user.username)

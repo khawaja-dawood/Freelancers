@@ -32,8 +32,8 @@
                   <h2 class="singleProject__title">{{ project.title}}</h2>
               </div>
 
-            <div class="">
-              {% if project.developer == user %}
+            <div class="" style="text-align: center; margin-left:-20px; margin-right:-20px; display:inline-block; padding: 10px;">
+              {% if project.developer.user == user %}
                   <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'update-project' project.id %}">Update</a>
                   <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete-project' project.id %}">Delete</a>
               {% endif %}
