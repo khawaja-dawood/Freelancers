@@ -30,21 +30,21 @@ class UserAdminConfig(UserAdmin, admin.ModelAdmin):
     # action list
     actions = [make_inactive, make_active]
     # search facility
-    search_fields = ('email', 'username', 'registration_number', 'organization_role')
+    search_fields = ('email', 'username', 'registration_number', 'user_roles')
     # sidebar filters
-    list_filter = ('email', 'username', 'is_active', 'registration_number', 'organization_role')
+    list_filter = ('email', 'username', 'is_active', 'registration_number', 'user_roles')
     # order of the users listing
     ordering = ('-date_joined',)
     # column names on users page about User_Info
     list_display = (
-        'username', 'registration_number', 'email', 'first_name', 'last_name', 'phone_number', 'organization_role', 'is_active',
+        'username', 'registration_number', 'email', 'first_name', 'last_name', 'phone_number', 'user_roles', 'is_active',
         'is_staff')
     # styling fields on user page
     fieldsets = (
         (None, {'fields': ('registration_number', 'username', 'email', 'password')}),
         (
             _('Personal info'),
-            {'fields': ('first_name', 'last_name', 'phone_number', 'organization_role', 'job_title', 'about', 'tags')}),
+            {'fields': ('first_name', 'last_name', 'phone_number', 'user_roles', 'user_title', 'about', 'tags')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
@@ -60,7 +60,7 @@ class UserAdminConfig(UserAdmin, admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (
                 'registration_number', 'username', 'first_name', 'last_name', 'phone_number', 'about', 'tags',
-                'organization_role', 'job_title', 'email', 'password1', 'password2', 'is_active', 'is_staff',
+                'user_roles', 'user_title', 'email', 'password1', 'password2', 'is_active', 'is_staff',
                 'is_superuser', 'groups', 'user_permissions'),
         }),
     )

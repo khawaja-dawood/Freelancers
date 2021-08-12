@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import ProjectForm
+from users.models import Profile
 
 
 def projects(request):
@@ -63,6 +64,7 @@ def delete_project(request, pk):
 
 
 def index(request):
-    developers = MyUser.objects.filter(Q(organization_role=2) | Q(organization_role=3))    # print(developers)
+    # developers = MyUser.objects.filter(Q(user_roles='Student') | Q(user_roles='Admin') | Q(user_roles='Teacher'))    # print(developers)
+    developers = Profile.objects.all()
     context = {'objects': developers}
     return render(request, template_name='projects/index.html', context=context)

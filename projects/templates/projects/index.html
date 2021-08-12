@@ -33,19 +33,19 @@
 
                   <div class="column card">
                     <div class="dev">
-                      <a href="/profile.html" class="card__body">
+                      <a href="{% url 'profile' dev.id %}" class="card__body">
                         <div class="dev__profile">
-                          <img class="avatar avatar--md" src="" alt="image"/>
+                          <img class="avatar avatar--md" src="{{ dev.imageURL }}" alt="image"/>
                           <div class="dev__meta">
-                            <h3>{{ dev.get_full_name }}</h3>
-                            <h5>{{ dev.job_title }}</h5>
+                            <h3>{{ dev.user.get_full_name }}</h3>
+                            <h5>{{ dev.user.user_title|slice:"60" }}</h5>
                           </div>
                         </div>
                         <p class="dev__info">
-                            {{ dev.about }}
+                            {{ dev.bio|slice:"200" }}
                         </p>
                         <div class="dev__skills">
-                            {% for tag in dev.tags.all %}
+                            {% for tag in dev.user.tags.all %}
                               <span class="tag tag--pill tag--main">
                                 <small>{{ tag }}</small>
                               </span>
@@ -61,22 +61,7 @@
           </div>
         </section>
 
-        <div class="pagination">
-          <ul class="container">
-            <li><a href="#" class="btn btn--disabled">&#10094; Prev</a></li>
-            <li><a href="#" class="btn btn--sub">01</a></li>
-            <li><a href="#" class="btn">02</a></li>
-            <li><a href="#" class="btn">03</a></li>
-            <li><a href="#" class="btn">04</a></li>
-            <li><a href="#" class="btn">05</a></li>
-            <li><a href="#" class="btn">06</a></li>
-            <li><a href="#" class="btn">07</a></li>
-            <li><a href="#" class="btn">08</a></li>
-            <li><a href="#" class="btn">09</a></li>
-            <li><a href="#" class="btn">10</a></li>
-            <li><a href="#" class="btn">Next &#10095;</a></li>
-          </ul>
-        </div>
+
     </main>
 
 {% endblock content %}
